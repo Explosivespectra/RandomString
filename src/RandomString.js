@@ -10,11 +10,14 @@ const RandomString = () => {
 
     const chooseString = () => {     
         if (currentInput.replace(/\n/gi,"").replace(/ /gi,"") !== "" ) {
-            var stringsToChoose = (currentInput.trim().split(/[\n ]+/));
+            var stringsToChoose = (currentInput.replace(/\n/gi," ").trim().split(/[ ]+/));
             var chosenString = stringsToChoose[Math.floor(Math.random() * stringsToChoose.length)];
+            var ind = stringsToChoose.indexOf(chosenString);
+            stringsToChoose.splice(ind, 1);
             setSelected((currentSelected.concat(" ")).concat(chosenString));
+            var newString = stringsToChoose.join(" ");
             if (removeString) {
-                setInput(currentInput.replace(chosenString, ""));
+                setInput(newString);
             }
         }
     }
